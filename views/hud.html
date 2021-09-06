@@ -1,142 +1,164 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-  
-	<title>Nightscout</title>
-  
-	<link href="/images/round1.png" rel="icon" id="favicon" type="image/png" />
-	<link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
-  
-	<style type="text/css">
-		@import url("//fonts.googleapis.com/css?family=Open+Sans:700");
-    	body {
-			text-align: center;
-			margin: 0 0;
-			padding: 0;
-			overflow: hidden;
-			font-family: 'Open Sans';
-			color: white;
-			background-color: black;
-			-moz-transform: scale(1, -1);
-			-webkit-transform: scale(1, -1);
-			-o-transform: scale(1, -1);
-			-ms-transform: scale(1, -1);
-			transform: scale(1, -1);
-		}
-		main {
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: -webkit-flex;
-			display: flex;
-			-webkit-box-align: center;
-			-ms-flex-align: center;
-			-webkit-align-items: center;
-			align-items: center;
-			height: 100vh;
-		}
-		.inner {
-			width: 100%;
-			-webkit-transform: translateY(-2%);
-		}
-		#trend {
-			display: -ms-flexbox;
-			display: -webkit-flex;
-			display: flex;
-			-ms-flex-align: center;
-			-webkit-align-items: center;
-			align-items: center;
-			justify-content: center;
-			-webkit-flex-direction: row;
-			flex-direction: row;
-		}
-		#bgnow, #arrowDiv {
-			display: flex;
-			flex-grow: 0;
-			font-weight: 700;
-			font-size: 30vmin;
-			padding: 0 20px;
-			margin: 0;
-		}
-		img#arrow {
-			height: 15vmin;
-		}
-		#clock {
-			font-weight: 700;
-			font-size: 15vmin;
-		}
-		.stale {
-			text-decoration: line-through;
-		}
+<html xmlns="http://www.w3.org/1999/html"><head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>Nightscout</title>
+
+  <link href="/images/round1.png" rel="icon" id="favicon" type="image/png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+
+  <style type="text/css">
+    @import url("//fonts.googleapis.com/css?family=Open+Sans:700");
+    body {
+  text-align: center;
+  margin: 0 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  color: grey;
+  background-color: black;
+}
+
+main {
+  height: 100vh;
+}
+
+#inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-flow: wrap;
+  height: 100%;
+  width: 100%;
+}
+
+#inner div {
+  margin-right: 2vmin;
+  margin-left: 2vmin;
+  line-height: 1em;
+}
+
+#inner div img {
+  height: 100%;
+}
+
+#inner div.nl {
+  width: 100%;
+  margin: 0;
+  height: 3vmin;
+}
+
+#errorMessage {
+  font-size: 25em;
+}
+
+.stale {
+  text-decoration: line-through;
+}
+
+.close {
+  color: white;
+  font: 4em 'Open Sans';
+  position: absolute;
+  top: 0;
+  right: 20px;
+  text-decoration: none;
+  z-index: 10;
+}
+
+.close:after {
+  content: '\00D7';
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.5s linear;
+}
+    
   </style>
-</head>
+<script src="/api/v1/status.js?t=1630945378144&amp;secret=1d136f448eb6a6e2dc7749a70af04312b57c01d4"></script></head>
 
-<body>
+<body style="background-color: black; color: grey;">
+  <main>
+    <a href="/" id="closeButton" class="close hidden"></a>
+    <div id="inner" data-face="bgclock">
+    <div class="sg" style="font-size:35vmin">6.4</div><div class="nl"></div><div class="ar" style="height: 25vmin; filter: brightness(50%);"><img alt="arrow" src="/images/Flat.svg"></div><div class="nl"></div><div class="ag" style="font-size:6vmin"></div></div>
+  </main>
+  <script src="/bundle/js/bundle.clock.js"></script>
 
-	<main>
-		<div class="inner">
-			<div id="trend">
-				<div id="bgnow"></div>
-				<div id="arrowDiv"><img id="arrow" src=""/></div>
-			</div>
-		</div>
-	</main>
-	
-	<script src="/api/v1/status.js"></script>
-	<script src="/js/bundle.js?v=2c1zd4vahmonsjvk"></script>
+  <script type="text/javascript">
+    var clockFace = "bgclock"; // can now be used in scripts
 
-	<script type="text/javascript">
-		function query ( ) {
-			console.log('query');
-			$.ajax('/api/v1/entries/current.json', { success: render });
-		}
-		function render (xhr) {
-			console.log('xhr', xhr);
-			
-			var rec = xhr[0];
-			var last = new Date(rec.date);
-			var now = new Date( );
-			
-			// Convert BG to mmol/L if necessary.
-			if (window.serverSettings.settings.units == 'mmol') {
-				rec.sgv = Nightscout.units.mgdlToMMOL(rec.sgv);
-			}
-			
-			// Insert the BG value text.
-			$('#bgnow').html(rec.sgv);
-			
-			// Insert the trend arrow.
-			$('#arrow').attr('src', 'images/'+rec.direction+'.svg');
-			
-			// Time before data considered stale.
-			var staleMinutes = 13;										
-			var threshold = 1000 * 60 * staleMinutes;
-			
-			// Toggle stale if necessary.
-			$('#bgnow').toggleClass('stale', (now - last > threshold));
-			// Generate and insert the clock.
-			var timeDivisor = (window.serverSettings.settings.timeFormat) ? window.serverSettings.settings.timeFormat : 12;
-			var today = new Date(),
-			h = today.getHours() % timeDivisor || timeDivisor,
-			m = today.getMinutes();
-			if (m < 10) m = "0" + m;
-			$('#clock').text(h + ":" + m);
-		}
-		function init ( ) {
-			console.log('init');
-			query( );
-			setInterval(query, 1 * 60 * 1000);
-		}
-		init( );
-	</script>
-</body>
-</html>
+    var parts = (location.search || '?').substring(1).split('&');
+    var token = '';
+    parts.forEach(function(val) {
+      if (val.startsWith('token=')) {
+        token = val.substring('token='.length);
+      }
+    });
+
+    var secret = typeof localStorage !== 'undefined' ? localStorage.getItem('apisecrethash') : '';
+    var src = '/api/v1/status.js?t=' + Date.now();
+
+    if (secret) {
+      src += '&secret=' + secret;
+    } else if (token) {
+      src += '&token=' + token;
+    }
+
+    var script = document.createElement('script');
+    script.onload = function() {
+      window.Nightscout.client.init();
+    };
+    script.src = src;
+
+    document.head.appendChild(script); //or something of the likes
+    
+    var buttonVisible = true;
+
+    function hideClose () {
+      document.getElementById('closeButton').classList.add('hidden');
+      buttonVisible = false;
+    }
+
+    // Show on start so user knows it's there
+    setTimeout(function() {
+      hideClose();
+    }, 2000);
+
+    function showClose () {
+      if (buttonVisible) return;
+
+      buttonVisible = true;
+      document.getElementById('closeButton').classList.remove('hidden');
+      setTimeout(function() {
+        hideClose();
+      }, 2000);
+    }
+
+    window.addEventListener('touchstart', function() {
+      showClose();
+    });
+
+    window.addEventListener('click', function() {
+      showClose();
+    });
+    
+  </script>
+  
+
+
+
+</body></html>
